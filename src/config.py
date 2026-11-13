@@ -16,7 +16,7 @@ SYMBOL_1 = "ETH/USDT"
 SYMBOL_2 = "BTC/USDT"
 TIMEFRAME = "1h"
 VENTANA_HORAS = 150
-UMBRAL_ENTRADA = 0.1    # Podés cambiarlo a 3.5 si querés modo francotirador extremo
+UMBRAL_ENTRADA = 0.01    # Podés cambiarlo a 3.5 si querés modo francotirador extremo
 UMBRAL_SALIDA = 0.0     # Vuelta a la media (banda relajada)
 UMBRAL_STOP_LOSS = 4.5  # Freno de emergencia si el Z-Score se descontrola
 
