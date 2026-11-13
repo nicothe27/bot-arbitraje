@@ -4,10 +4,9 @@ from src.data_engine import obtener_estado_mercado
 from src.notifier import enviar_telegram
 
 def ejecutar_ciclo():
-    # LÍNEA DE PRUEBA TEMPORAL
+    # LÍNEA DE PRUEBA TEMPORAL PARA TELEGRAM
     enviar_telegram("🚨 <b>TEST DE EJECUCIÓN:</b> ¡El workflow de GitHub despertó y avisa con éxito!")
     
-    # ... resto del código ...
     modo_txt = "🧪 TESTNET" if USE_TESTNET else "🔥 REAL"
     print(f"--- Iniciando ronda de vigilancia ({modo_txt}) ---")
     
@@ -51,7 +50,6 @@ def ejecutar_ciclo():
         # ==========================================
         else:
             if z <= -UMBRAL_ENTRADA:
-                # ETH barato frente a BTC -> Long ETH / Short BTC
                 res = abrir_arbitraje(exchange, direccion=1, precio_eth=mercado["precio_eth"], precio_btc=mercado["precio_btc"])
                 enviar_telegram(
                     f"<b>🚀 NUEVO DISPARO DE ARBITRAJE ({modo_txt})</b>\n"
@@ -60,7 +58,6 @@ def ejecutar_ciclo():
                     f"<b>Tamaño por pierna:</b> ${res['usd_por_pierna']} USD"
                 )
             elif z >= UMBRAL_ENTRADA:
-                # ETH caro frente a BTC -> Short ETH / Long BTC
                 res = abrir_arbitraje(exchange, direccion=-1, precio_eth=mercado["precio_eth"], precio_btc=mercado["precio_btc"])
                 enviar_telegram(
                     f"<b>🚀 NUEVO DISPARO DE ARBITRAJE ({modo_txt})</b>\n"
