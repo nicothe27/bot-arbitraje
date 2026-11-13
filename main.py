@@ -4,6 +4,10 @@ from src.data_engine import obtener_estado_mercado
 from src.notifier import enviar_telegram
 
 def ejecutar_ciclo():
+    # LÍNEA DE PRUEBA TEMPORAL
+    enviar_telegram("🚨 <b>TEST DE EJECUCIÓN:</b> ¡El workflow de GitHub despertó y avisa con éxito!")
+    
+    # ... resto del código ...
     modo_txt = "🧪 TESTNET" if USE_TESTNET else "🔥 REAL"
     print(f"--- Iniciando ronda de vigilancia ({modo_txt}) ---")
     
