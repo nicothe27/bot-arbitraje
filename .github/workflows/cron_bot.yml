@@ -1,0 +1,32 @@
+name: Bot Arbitraje ETH-BTC 24/7
+
+on:
+  schedule:
+    # Corre en el minuto 01 de cada hora, todos los días (24/7)
+    - cron: '1 * * * *'
+  workflow_dispatch: # Te permite correrlo manualmente con un botón desde GitHub
+
+jobs:
+  ejecutar-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Descargar código del repositorio
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 3. Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: 4. Ejecutar ronda de vigilancia
+        env:
+          BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
+          BINANCE_API_SECRET: ${{ secrets.BINANCE_API_SECRET }}
+          USE_TESTNET: ${{ secrets.USE_TESTNET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python main.py
